@@ -1,0 +1,6 @@
+Revision history for Perl extension Anansi::Singleton.
+
+0.01  Sat Apr  6 20:32:21 2013
+	- original version; created by h2xs 1.23 with options
+		-AX Anansi::Singleton
+
