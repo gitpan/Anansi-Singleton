@@ -38,7 +38,7 @@ no longer used.
 =cut
 
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use base qw(Anansi::Class);
 
@@ -141,7 +141,7 @@ sub reinitialise {
 
 =head1 AUTHOR
 
-Kevin Treleaven <kevin@treleaven.net>
+Kevin Treleaven <kevin AT treleaven DOT net>
 
 =cut
 
