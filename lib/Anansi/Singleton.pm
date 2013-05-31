@@ -8,37 +8,39 @@ is allowed.
 
 =head1 SYNOPSIS
 
- package Anansi::Example;
+    package Anansi::Example;
 
- use base qw(Anansi::Singleton);
+    use base qw(Anansi::Singleton);
 
- sub finalise {
-  my ($self, %parameters) = @_;
- }
+    sub finalise {
+        my ($self, %parameters) = @_;
+    }
 
- sub fixate {
-  my ($self, %parameters) = @_;
- }
+    sub fixate {
+        my ($self, %parameters) = @_;
+    }
 
- sub initialise {
-  my ($self, %parameters) = @_;
- }
+    sub initialise {
+        my ($self, %parameters) = @_;
+    }
 
- sub reinitialise {
-  my ($self, %parameters) = @_;
- }
+    sub reinitialise {
+        my ($self, %parameters) = @_;
+    }
+
+    1;
 
 =head1 DESCRIPTION
 
 This is a base module definition that manages the creation and destruction of
 module object instances that are not repeatable including embedded objects and
 ensures that destruction can only occur when all duplicate object instances are
-no longer used.
+no longer used.  Uses L<Anansi::Class>, L<Anansi::ObjectManager> and L<base>.
 
 =cut
 
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use base qw(Anansi::Class);
 
@@ -48,12 +50,74 @@ use Anansi::ObjectManager;
 my $NAMESPACE = {};
 
 
+=head1 INHERITED METHODS
+
+=cut
+
+
+=head2 finalise
+
+Declared in L<Anansi::Class>.  Intended to be overridden by an extending module.
+
+=cut
+
+
+=head2 implicate
+
+Declared in L<Anansi::Class>.  Intended to be overridden by an extending module.
+
+=cut
+
+
+=head2 import
+
+Declared in L<Anansi::Class>.
+
+=cut
+
+
+=head2 initialise
+
+Declared in L<Anansi::Class>.  Intended to be overriddeni by an extending module..
+
+=cut
+
+
+=head2 old
+
+Declared in L<Anansi::Class>.
+
+=cut
+
+
+=head2 used
+
+Declared in L<Anansi::Class>.
+
+=cut
+
+
+=head2 uses
+
+Declared in L<Anansi::Class>.
+
+=cut
+
+
 =head1 METHODS
 
 =cut
 
 
 =head2 DESTROY
+
+=over 4
+
+=item self I<(Blessed Hash, Required)>
+
+An object of this namespace.
+
+=back
 
 Performs module object instance clean-up actions.  Indirectly called by the perl
 interpreter.
@@ -79,8 +143,20 @@ sub DESTROY {
 
 =head2 fixate
 
+=over 4
+
+=item self I<(Blessed Hash, Required)>
+
+An object of this namespace.
+
+=item parameters I<(Hash, Optional)>
+
+Named parameters.
+
+=back
+
 Called just prior to module instance object destruction where there are multiple
-instances of the object remaining.  Intended to be replaced by an extending
+instances of the object remaining.  Intended to be overridden by an extending
 module.  Indirectly called.
 
 =cut
@@ -93,10 +169,10 @@ sub fixate {
 
 =head2 new
 
- my $object = Anansi::Example->new();
- my $object = Anansi::Example->new(
-  SETTING => 'example',
- );
+    my $object = Anansi::Example->new();
+    my $object = Anansi::Example->new(
+        SETTING => 'example',
+    );
 
 Instantiates or reinstantiates an object instance of a module.  Indirectly
 called via an extending module.
@@ -128,8 +204,8 @@ sub new {
 
 =head2 reinitialise
 
-Called just after module instance object recreation.  Intended to be replaced by
-an extending module.  Indirectly called.
+Called just after module instance object recreation.  Intended to be overridden
+by an extending module.  Indirectly called.
 
 =cut
 
@@ -139,9 +215,19 @@ sub reinitialise {
 }
 
 
+=head1 NOTES
+
+This module is designed to make it simple, easy and quite fast to code your
+design in perl.  If for any reason you feel that it doesn't achieve these goals
+then please let me know.  I am here to help.  All constructive criticisms are
+also welcomed.
+
+=cut
+
+
 =head1 AUTHOR
 
-Kevin Treleaven <kevin AT treleaven DOT net>
+Kevin Treleaven <kevin I<AT> treleaven I<DOT> net>
 
 =cut
 

@@ -6,4 +6,5 @@ Revision history for Perl extension Anansi::Singleton.
 0.02  Wed Apr 10 13:05:15 2013
 	- added module dependencies to makefile.
 	- munged email address.
-
+0.03  Mon May 20 11:07:46 2013
+	- modified the POD.
