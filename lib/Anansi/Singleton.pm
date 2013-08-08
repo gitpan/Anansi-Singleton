@@ -40,7 +40,7 @@ no longer used.  Uses L<Anansi::Class>, L<Anansi::ObjectManager> and L<base>.
 =cut
 
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use base qw(Anansi::Class);
 
@@ -55,16 +55,48 @@ my $NAMESPACE = {};
 =cut
 
 
+=head2 DESTROY
+
+=over 4
+
+=item self I<(Blessed Hash, Required)>
+
+An object of this namespace.
+
+=back
+
+Declared in L<Anansi::Class>.  Overridden by this module.  Performs module
+object instance clean-up actions.  Indirectly called by the perl interpreter.
+
+=cut
+
+
+sub DESTROY {
+    my ($self) = @_;
+    my $objectManager = Anansi::ObjectManager->new();
+    if(1 == $objectManager->registrations($self)) {
+        $self->finalise();
+        $objectManager->obsolete(
+            USER => $self,
+        );
+        $objectManager->unregister($self);
+    } elsif(1 < $objectManager->registrations($self)) {
+        $self->fixate();
+        $objectManager->unregister($self);
+    }
+}
+
+
 =head2 finalise
 
-Declared in L<Anansi::Class>.  Intended to be overridden by an extending module.
+Declared as a virtual method in L<Anansi::Class>.
 
 =cut
 
 
 =head2 implicate
 
-Declared in L<Anansi::Class>.  Intended to be overridden by an extending module.
+Declared as a virtual method in L<Anansi::Class>.
 
 =cut
 
@@ -78,9 +110,44 @@ Declared in L<Anansi::Class>.
 
 =head2 initialise
 
-Declared in L<Anansi::Class>.  Intended to be overriddeni by an extending module..
+Declared as a virtual method in L<Anansi::Class>.
 
 =cut
+
+
+=head2 new
+
+    my $object = Anansi::Example->new();
+    my $object = Anansi::Example->new(
+        SETTING => 'example',
+    );
+
+Declared in L<Anansi::Class>.  Overridden by this module.  Instantiates or
+reinstantiates an object instance of a module.
+
+=cut
+
+
+sub new {
+    my ($class, %parameters) = @_;
+    return if(ref($class) =~ /^(ARRAY|CODE|FORMAT|GLOB|HASH|IO|LVALUE|REF|Regexp|SCALAR|VSTRING)$/i);
+    $class = ref($class) if(ref($class) !~ /^$/);
+    if(!defined($NAMESPACE->{$class})) {
+        my $self = {
+            NAMESPACE => $class,
+            PACKAGE => __PACKAGE__,
+        };
+        $NAMESPACE->{$class} = bless($self, $class);
+        my $objectManager = Anansi::ObjectManager->new();
+        $objectManager->register($NAMESPACE->{$class});
+        $NAMESPACE->{$class}->initialise(%parameters);
+    } else {
+        my $objectManager = Anansi::ObjectManager->new();
+        $objectManager->register($NAMESPACE->{$class});
+        $NAMESPACE->{$class}->reinitialise(%parameters);
+    }
+    return $NAMESPACE->{$class};
+}
 
 
 =head2 old
@@ -109,39 +176,11 @@ Declared in L<Anansi::Class>.
 =cut
 
 
-=head2 DESTROY
-
-=over 4
-
-=item self I<(Blessed Hash, Required)>
-
-An object of this namespace.
-
-=back
-
-Performs module object instance clean-up actions.  Indirectly called by the perl
-interpreter.
-
-=cut
-
-
-sub DESTROY {
-    my ($self) = @_;
-    my $objectManager = Anansi::ObjectManager->new();
-    if(1 == $objectManager->registrations($self)) {
-        $self->finalise();
-        $objectManager->obsolete(
-            USER => $self,
-        );
-        $objectManager->unregister($self);
-    } elsif(1 < $objectManager->registrations($self)) {
-        $self->fixate();
-        $objectManager->unregister($self);
-    }
-}
-
-
 =head2 fixate
+
+    $OBJECT->fixate();
+
+    $OBJECT->SUPER::fixate();
 
 =over 4
 
@@ -155,9 +194,8 @@ Named parameters.
 
 =back
 
-Called just prior to module instance object destruction where there are multiple
-instances of the object remaining.  Intended to be overridden by an extending
-module.  Indirectly called.
+Declared as a virtual method.  Called just prior to module instance object
+destruction where there are multiple instances of the object remaining.
 
 =cut
 
@@ -167,45 +205,26 @@ sub fixate {
 }
 
 
-=head2 new
-
-    my $object = Anansi::Example->new();
-    my $object = Anansi::Example->new(
-        SETTING => 'example',
-    );
-
-Instantiates or reinstantiates an object instance of a module.  Indirectly
-called via an extending module.
-
-=cut
-
-
-sub new {
-    my ($class, %parameters) = @_;
-    return if(ref($class) =~ /^(ARRAY|CODE|FORMAT|GLOB|HASH|IO|LVALUE|REF|Regexp|SCALAR|VSTRING)$/i);
-    $class = ref($class) if(ref($class) !~ /^$/);
-    if(!defined($NAMESPACE->{$class})) {
-        my $self = {
-            NAMESPACE => $class,
-            PACKAGE => __PACKAGE__,
-        };
-        $NAMESPACE->{$class} = bless($self, $class);
-        my $objectManager = Anansi::ObjectManager->new();
-        $objectManager->register($NAMESPACE->{$class});
-        $NAMESPACE->{$class}->initialise(%parameters);
-    } else {
-        my $objectManager = Anansi::ObjectManager->new();
-        $objectManager->register($NAMESPACE->{$class});
-        $NAMESPACE->{$class}->reinitialise(%parameters);
-    }
-    return $NAMESPACE->{$class};
-}
-
-
 =head2 reinitialise
 
-Called just after module instance object recreation.  Intended to be overridden
-by an extending module.  Indirectly called.
+    $OBJECT->reinitialise();
+
+    $OBJECT->SUPER::reinitialise();
+
+=over 4
+
+=item self I<(Blessed Hash, Required)>
+
+An object of this namespace.
+
+=item parameters I<(Hash, Optional)>
+
+Named parameters.
+
+=back
+
+Declared as a virtual method.  Called just after module instance object
+recreation.  Intended to be overridden by an extending module.
 
 =cut
 

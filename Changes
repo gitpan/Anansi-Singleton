@@ -8,3 +8,5 @@ Revision history for Perl extension Anansi::Singleton.
 	- munged email address.
 0.03  Mon May 20 11:07:46 2013
 	- modified the POD.
+0.04  Wed Aug  7 22:07:33 2013
+	- modified the POD.
