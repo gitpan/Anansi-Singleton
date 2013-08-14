@@ -40,7 +40,7 @@ no longer used.  Uses L<Anansi::Class>, L<Anansi::ObjectManager> and L<base>.
 =cut
 
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 use base qw(Anansi::Class);
 
@@ -50,7 +50,67 @@ use Anansi::ObjectManager;
 my $NAMESPACE = {};
 
 
-=head1 INHERITED METHODS
+=head1 METHODS
+
+=cut
+
+
+=head2 L<Anansi::Class|Anansi::Class>
+
+=cut
+
+
+=head3 L<DESTROY|Anansi::Class/"DESTROY">
+
+Overridden by L<Anansi::Singleton::DESTROY|Anansi::Singleton/"DESTROY">.
+
+=cut
+
+
+=head3 L<finalise|Anansi::Class/"finalise">
+
+A virtual method.
+
+=cut
+
+
+=head3 L<implicate|Anansi::Class/"implicate">
+
+A virtual method.
+
+=cut
+
+
+=head3 L<import|Anansi::Class/"import">
+
+=cut
+
+
+=head3 L<initialise|Anansi::Class/"initialise">
+
+A virtual method.
+
+=cut
+
+
+=head3 L<new|Anansi::Class/"new">
+
+Overridden by L<Anansi::Singleton::new|Anansi::Singleton/"new">.
+
+=cut
+
+
+=head3 L<old|Anansi::Class/"old">
+
+=cut
+
+
+=head3 L<used|Anansi::Class/"used">
+
+=cut
+
+
+=head3 L<uses|Anansi::Class/"uses">
 
 =cut
 
@@ -65,7 +125,7 @@ An object of this namespace.
 
 =back
 
-Declared in L<Anansi::Class>.  Overridden by this module.  Performs module
+Overrides L<Anansi::Class::DESTROY|Anansi::Class/"DESTROY">.  Performs module
 object instance clean-up actions.  Indirectly called by the perl interpreter.
 
 =cut
@@ -87,32 +147,33 @@ sub DESTROY {
 }
 
 
-=head2 finalise
+=head2 fixate
 
-Declared as a virtual method in L<Anansi::Class>.
+    $OBJECT->fixate();
 
-=cut
+    $OBJECT->SUPER::fixate();
 
+=over 4
 
-=head2 implicate
+=item self I<(Blessed Hash, Required)>
 
-Declared as a virtual method in L<Anansi::Class>.
+An object of this namespace.
 
-=cut
+=item parameters I<(Hash, Optional)>
 
+Named parameters.
 
-=head2 import
+=back
 
-Declared in L<Anansi::Class>.
-
-=cut
-
-
-=head2 initialise
-
-Declared as a virtual method in L<Anansi::Class>.
+A virtual method.  Called just prior to module instance object destruction where
+there are multiple instances of the object remaining.
 
 =cut
+
+
+sub fixate {
+    my ($self, %parameters) = @_;
+}
 
 
 =head2 new
@@ -122,7 +183,7 @@ Declared as a virtual method in L<Anansi::Class>.
         SETTING => 'example',
     );
 
-Declared in L<Anansi::Class>.  Overridden by this module.  Instantiates or
+Overrides L<Anansi::Class::new|Anansi::Class/"new">.  Instantiates or
 reinstantiates an object instance of a module.
 
 =cut
@@ -150,61 +211,6 @@ sub new {
 }
 
 
-=head2 old
-
-Declared in L<Anansi::Class>.
-
-=cut
-
-
-=head2 used
-
-Declared in L<Anansi::Class>.
-
-=cut
-
-
-=head2 uses
-
-Declared in L<Anansi::Class>.
-
-=cut
-
-
-=head1 METHODS
-
-=cut
-
-
-=head2 fixate
-
-    $OBJECT->fixate();
-
-    $OBJECT->SUPER::fixate();
-
-=over 4
-
-=item self I<(Blessed Hash, Required)>
-
-An object of this namespace.
-
-=item parameters I<(Hash, Optional)>
-
-Named parameters.
-
-=back
-
-Declared as a virtual method.  Called just prior to module instance object
-destruction where there are multiple instances of the object remaining.
-
-=cut
-
-
-sub fixate {
-    my ($self, %parameters) = @_;
-}
-
-
 =head2 reinitialise
 
     $OBJECT->reinitialise();
@@ -223,8 +229,8 @@ Named parameters.
 
 =back
 
-Declared as a virtual method.  Called just after module instance object
-recreation.  Intended to be overridden by an extending module.
+A virtual method.  Called just after module instance object recreation.
+Intended to be overridden by an extending module.
 
 =cut
 

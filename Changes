@@ -1,6 +1,6 @@
 Revision history for Perl extension Anansi::Singleton.
 
-0.01  Sat Apr  6 20:32:21 2013
+0.01  Sat Apr 06 20:32:21 2013
 	- original version; created by h2xs 1.23 with options
 		-AX Anansi::Singleton
 0.02  Wed Apr 10 13:05:15 2013
@@ -8,5 +8,7 @@ Revision history for Perl extension Anansi::Singleton.
 	- munged email address.
 0.03  Mon May 20 11:07:46 2013
 	- modified the POD.
-0.04  Wed Aug  7 22:07:33 2013
+0.04  Wed Aug 07 22:07:33 2013
 	- modified the POD.
+0.05  Thu Aug 08 12:55:50 2013
+	- simplified the POD style.
