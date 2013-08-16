@@ -40,7 +40,7 @@ no longer used.  Uses L<Anansi::Class>, L<Anansi::ObjectManager> and L<base>.
 =cut
 
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 use base qw(Anansi::Class);
 
@@ -57,136 +57,80 @@ my $NAMESPACE = {};
 
 =head2 Anansi::Class
 
-=over 4
-
-=item S< >
-
-I<(L<Anansi::Class|Anansi::Class>)>
-A parent module.
-
-=back
+I<(L<Anansi::Class|Anansi::Class>)>  A parent module.
 
 =cut
 
 
 =head3 DESTROY
 
-=over 4
-
-=item S< >
-
 I<(L<Anansi::Class::DESTROY|Anansi::Class/"DESTROY">)>
-Overridden by L<Anansi::Singleton::DESTROY|Anansi::Singleton/"DESTROY">.
 
-=back
+Overridden by L<Anansi::Singleton::DESTROY|Anansi::Singleton/"DESTROY">.
 
 =cut
 
 
 =head3 finalise
 
-=over 4
-
-=item S< >
-
 I<(L<Anansi::Class::finalise|Anansi::Class/"finalise">)>
-A virtual method.
 
-=back
+A virtual method.
 
 =cut
 
 
 =head3 implicate
 
-=over 4
-
-=item S< >
-
 I<(L<Anansi::Class::implicate|Anansi::Class/"implicate">)>
-A virtual method.
 
-=back
+A virtual method.
 
 =cut
 
 
 =head3 import
 
-=over 4
-
-=item S< >
-
 I<(L<Anansi::Class::import|Anansi::Class/"import">)>
-
-=back
 
 =cut
 
 
 =head3 initialise
 
-=over 4
-
-=item S< >
-
 I<(L<Anansi::Class::initialise|Anansi::Class/"initialise">)>
-A virtual method.
 
-=back
+A virtual method.
 
 =cut
 
 
 =head3 new
 
-=over 4
-
-=item S< >
-
 I<(L<Anansi::Class::new|Anansi::Class/"new">)>
-Overridden by L<Anansi::Singleton::new|Anansi::Singleton/"new">.
 
-=back
+Overridden by L<Anansi::Singleton::new|Anansi::Singleton/"new">.
 
 =cut
 
 
 =head3 old
 
-=over 4
-
-=item S< >
-
 I<(L<Anansi::Class::old|Anansi::Class/"old">)>
-
-=back
 
 =cut
 
 
 =head3 used
 
-=over 4
-
-=item S< >
-
 I<(L<Anansi::Class::used|Anansi::Class/"used">)>
-
-=back
 
 =cut
 
 
 =head3 uses
 
-=over 4
-
-=item S< >
-
 I<(L<Anansi::Class::uses|Anansi::Class/"uses">)>
-
-=back
 
 =cut
 
