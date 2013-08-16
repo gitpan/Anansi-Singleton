@@ -12,3 +12,5 @@ Revision history for Perl extension Anansi::Singleton.
 	- modified the POD.
 0.05  Thu Aug 08 12:55:50 2013
 	- simplified the POD style.
+0.06  Wed Aug 14 15:46:07 2013
+	- modified the POD style.

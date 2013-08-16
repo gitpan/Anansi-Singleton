@@ -40,7 +40,7 @@ no longer used.  Uses L<Anansi::Class>, L<Anansi::ObjectManager> and L<base>.
 =cut
 
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 use base qw(Anansi::Class);
 
@@ -55,62 +55,138 @@ my $NAMESPACE = {};
 =cut
 
 
-=head2 L<Anansi::Class|Anansi::Class>
+=head2 Anansi::Class
+
+=over 4
+
+=item S< >
+
+I<(L<Anansi::Class|Anansi::Class>)>
+A parent module.
+
+=back
 
 =cut
 
 
-=head3 L<DESTROY|Anansi::Class/"DESTROY">
+=head3 DESTROY
 
+=over 4
+
+=item S< >
+
+I<(L<Anansi::Class::DESTROY|Anansi::Class/"DESTROY">)>
 Overridden by L<Anansi::Singleton::DESTROY|Anansi::Singleton/"DESTROY">.
 
+=back
+
 =cut
 
 
-=head3 L<finalise|Anansi::Class/"finalise">
+=head3 finalise
 
+=over 4
+
+=item S< >
+
+I<(L<Anansi::Class::finalise|Anansi::Class/"finalise">)>
 A virtual method.
 
+=back
+
 =cut
 
 
-=head3 L<implicate|Anansi::Class/"implicate">
+=head3 implicate
 
+=over 4
+
+=item S< >
+
+I<(L<Anansi::Class::implicate|Anansi::Class/"implicate">)>
 A virtual method.
 
-=cut
-
-
-=head3 L<import|Anansi::Class/"import">
+=back
 
 =cut
 
 
-=head3 L<initialise|Anansi::Class/"initialise">
+=head3 import
 
+=over 4
+
+=item S< >
+
+I<(L<Anansi::Class::import|Anansi::Class/"import">)>
+
+=back
+
+=cut
+
+
+=head3 initialise
+
+=over 4
+
+=item S< >
+
+I<(L<Anansi::Class::initialise|Anansi::Class/"initialise">)>
 A virtual method.
 
+=back
+
 =cut
 
 
-=head3 L<new|Anansi::Class/"new">
+=head3 new
 
+=over 4
+
+=item S< >
+
+I<(L<Anansi::Class::new|Anansi::Class/"new">)>
 Overridden by L<Anansi::Singleton::new|Anansi::Singleton/"new">.
 
-=cut
-
-
-=head3 L<old|Anansi::Class/"old">
+=back
 
 =cut
 
 
-=head3 L<used|Anansi::Class/"used">
+=head3 old
+
+=over 4
+
+=item S< >
+
+I<(L<Anansi::Class::old|Anansi::Class/"old">)>
+
+=back
 
 =cut
 
 
-=head3 L<uses|Anansi::Class/"uses">
+=head3 used
+
+=over 4
+
+=item S< >
+
+I<(L<Anansi::Class::used|Anansi::Class/"used">)>
+
+=back
+
+=cut
+
+
+=head3 uses
+
+=over 4
+
+=item S< >
+
+I<(L<Anansi::Class::uses|Anansi::Class/"uses">)>
+
+=back
 
 =cut
 
@@ -126,7 +202,11 @@ An object of this namespace.
 =back
 
 Overrides L<Anansi::Class::DESTROY|Anansi::Class/"DESTROY">.  Performs module
-object instance clean-up actions.  Indirectly called by the perl interpreter.
+object instance clean-up actions.  Either calls the
+L<fixate|Anansi::Singleton/"fixate"> method prior to dereferencing an instance
+of the object where more than one instance exists or the
+L<finalise|Anansi::Class/"finalise"> method prior to dereferencing the last
+instance.  Indirectly called by the perl interpreter.
 
 =cut
 
@@ -183,8 +263,24 @@ sub fixate {
         SETTING => 'example',
     );
 
+=over 4
+
+=item class I<(Blessed Hash B<or> String, Required)>
+
+Either an object or a string of this namespace.
+
+=item parameters I<(Hash, Optional)>
+
+Named parameters.
+
+=back
+
 Overrides L<Anansi::Class::new|Anansi::Class/"new">.  Instantiates or
-reinstantiates an object instance of a module.
+reinstantiates an object instance of a module.  Either calls the
+L<initialise|Anansi::Class/"initialise"> method with the supplied I<parameters>
+after the object is first instantiated or the
+L<reinitialise|Anansi::Singleton/"reinitialise"> method after subsequent
+instantiations.
 
 =cut
 
