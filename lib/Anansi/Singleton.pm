@@ -30,6 +30,14 @@ is allowed.
 
     1;
 
+    package main;
+
+    use Anansi::Example;
+
+    my $object = Anansi::Example->new();
+
+    1;
+
 =head1 DESCRIPTION
 
 This is a base module definition that manages the creation and destruction of
@@ -40,7 +48,7 @@ no longer used.  Uses L<Anansi::Class>, L<Anansi::ObjectManager> and L<base>.
 =cut
 
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 use base qw(Anansi::Class);
 
@@ -57,80 +65,83 @@ my $NAMESPACE = {};
 
 =head2 Anansi::Class
 
-I<(L<Anansi::Class|Anansi::Class>)>  A parent module.
+See L<Anansi::Class|Anansi::Class> for details.  A parent module of
+L<Anansi::Singleton|Anansi::Singleton>.
 
 =cut
 
 
 =head3 DESTROY
 
-I<(L<Anansi::Class::DESTROY|Anansi::Class/"DESTROY">)>
-
-Overridden by L<Anansi::Singleton::DESTROY|Anansi::Singleton/"DESTROY">.
+See L<Anansi::Class::DESTROY|Anansi::Class/"DESTROY"> for details.  Overridden
+by L<Anansi::Singleton::DESTROY|Anansi::Singleton/"DESTROY">.
 
 =cut
 
 
 =head3 finalise
 
-I<(L<Anansi::Class::finalise|Anansi::Class/"finalise">)>
-
-A virtual method.
+See L<Anansi::Class::finalise|Anansi::Class/"finalise"> for details.  A virtual
+method.
 
 =cut
 
 
 =head3 implicate
 
-I<(L<Anansi::Class::implicate|Anansi::Class/"implicate">)>
-
-A virtual method.
+See L<Anansi::Class::implicate|Anansi::Class/"implicate"> for details.  A
+virtual method.
 
 =cut
 
 
 =head3 import
 
-I<(L<Anansi::Class::import|Anansi::Class/"import">)>
+See L<Anansi::Class::import|Anansi::Class/"import"> for details.
 
 =cut
 
 
 =head3 initialise
 
-I<(L<Anansi::Class::initialise|Anansi::Class/"initialise">)>
-
-A virtual method.
+See L<Anansi::Class::initialise|Anansi::Class/"initialise"> for details.  A
+virtual method.
 
 =cut
 
 
 =head3 new
 
-I<(L<Anansi::Class::new|Anansi::Class/"new">)>
-
-Overridden by L<Anansi::Singleton::new|Anansi::Singleton/"new">.
+See L<Anansi::Class::new|Anansi::Class/"new"> for details.  Overridden by
+L<Anansi::Singleton::new|Anansi::Singleton/"new">.
 
 =cut
 
 
 =head3 old
 
-I<(L<Anansi::Class::old|Anansi::Class/"old">)>
+See L<Anansi::Class::old|Anansi::Class/"old"> for details.
 
 =cut
 
 
 =head3 used
 
-I<(L<Anansi::Class::used|Anansi::Class/"used">)>
+See L<Anansi::Class::used|Anansi::Class/"used"> for details.
 
 =cut
 
 
 =head3 uses
 
-I<(L<Anansi::Class::uses|Anansi::Class/"uses">)>
+See L<Anansi::Class::uses|Anansi::Class/"uses"> for details.
+
+=cut
+
+
+=head3 using
+
+See L<Anansi::Class::using|Anansi::Class/"using"> for details.
 
 =cut
 
@@ -270,7 +281,6 @@ Named parameters.
 =back
 
 A virtual method.  Called just after module instance object recreation.
-Intended to be overridden by an extending module.
 
 =cut
 

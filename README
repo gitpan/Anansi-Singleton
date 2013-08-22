@@ -1,4 +1,4 @@
-Anansi-Singleton version 0.07
+Anansi-Singleton version 0.08
 =============================
 
 The README is used to introduce the module and provide instructions on
@@ -27,6 +27,7 @@ This module requires these other modules and libraries:
 
     Anansi::Class
     Anansi::ObjectManager
+    base
 
 COPYRIGHT AND LICENCE
 
